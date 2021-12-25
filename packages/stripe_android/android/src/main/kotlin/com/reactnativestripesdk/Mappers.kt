@@ -423,12 +423,19 @@ internal fun mapToBillingDetails(billingDetails: ReadableMap?, cardAddress: Addr
     return null
   }
   val address = Address.Builder()
-    .setPostalCode(getValOr(billingDetails, "addressPostalCode"))
+    /* .setPostalCode(getValOr(billingDetails, "addressPostalCode"))
     .setCity(getValOr(billingDetails, "addressCity"))
     .setCountry(getValOr(billingDetails, "addressCountry"))
     .setLine1(getValOr(billingDetails, "addressLine1"))
     .setLine2(getValOr(billingDetails, "addressLine2"))
-    .setState(getValOr(billingDetails, "addressState"))
+    .setState(getValOr(billingDetails, "addressState")) */
+
+    .setPostalCode("addressPostalCode")
+    .setCity("addressCity")
+    .setCountry("addressCountry")
+    .setLine1("addressLine1")
+    .setLine2("addressLine2")
+    .setState("addressState")
 
     cardAddress?.let { ca ->
       ca.postalCode?.let {
@@ -438,7 +445,7 @@ internal fun mapToBillingDetails(billingDetails: ReadableMap?, cardAddress: Addr
         address.setCountry(it)
       }
     }
-
+print(getValOr(billingDetails, "addressLine1"));
   return PaymentMethod.BillingDetails.Builder()
     .setAddress(address.build())
     .setName(getValOr(billingDetails, "name"))
