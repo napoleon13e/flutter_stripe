@@ -445,7 +445,7 @@ internal fun mapToBillingDetails(billingDetails: ReadableMap?, cardAddress: Addr
         address.setCountry(it)
       }
     }
-print(getValOr(billingDetails, "addressLine1"));
+//print(getValOr(billingDetails, "addressLine1"));
   return PaymentMethod.BillingDetails.Builder()
     .setAddress(address.build())
     .setName(getValOr(billingDetails, "name"))
