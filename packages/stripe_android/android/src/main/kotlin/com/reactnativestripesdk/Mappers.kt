@@ -7,6 +7,7 @@ import com.stripe.android.PaymentAuthConfig
 import com.stripe.android.model.*
 
 internal fun createResult(key: String, value: WritableMap): WritableMap {
+  Log.d("+++++****////----FLUTTER_DEBUG", "111");
   val map = WritableNativeMap()
   map.putMap(key, value)
   return map
@@ -27,6 +28,7 @@ internal fun mapIntentStatus(status: StripeIntent.Status?): String {
 
 
 internal fun mapCaptureMethod(captureMethod: PaymentIntent.CaptureMethod?): String {
+  Log.d("+++++****////----FLUTTER_DEBUG", "222");
   return when (captureMethod) {
     PaymentIntent.CaptureMethod.Automatic -> "Automatic"
     PaymentIntent.CaptureMethod.Manual -> "Manual"
@@ -35,6 +37,7 @@ internal fun mapCaptureMethod(captureMethod: PaymentIntent.CaptureMethod?): Stri
 }
 
 internal fun mapConfirmationMethod(captureMethod: PaymentIntent.ConfirmationMethod?): String {
+  Log.d("+++++****////----FLUTTER_DEBUG", "333");
   return when (captureMethod) {
     PaymentIntent.ConfirmationMethod.Automatic -> "Automatic"
     PaymentIntent.ConfirmationMethod.Manual -> "Manual"
@@ -43,6 +46,7 @@ internal fun mapConfirmationMethod(captureMethod: PaymentIntent.ConfirmationMeth
 }
 
 internal fun mapToReturnURL(urlScheme: String?): String? {
+  Log.d("+++++****////----FLUTTER_DEBUG", "444");
   if (urlScheme != null) {
     return "$urlScheme://safepay"
   }
@@ -52,7 +56,7 @@ internal fun mapToReturnURL(urlScheme: String?): String? {
 internal fun mapIntentShipping(shipping: PaymentIntent.Shipping): WritableMap {
   val map: WritableMap = WritableNativeMap()
   val address: WritableMap = WritableNativeMap()
-
+  Log.d("+++++****////----FLUTTER_DEBUG", "555");
   address.putString("city", shipping.address.city)
   address.putString("country", shipping.address.country)
   address.putString("line1", shipping.address.line1)
@@ -69,6 +73,7 @@ internal fun mapIntentShipping(shipping: PaymentIntent.Shipping): WritableMap {
 }
 
 internal fun mapCardBrand(brand: CardBrand?): String {
+  Log.d("+++++****////----FLUTTER_DEBUG", "666");
   return when (brand) {
     CardBrand.AmericanExpress -> "AmericanExpress"
     CardBrand.DinersClub -> "DinersClub"
@@ -83,6 +88,7 @@ internal fun mapCardBrand(brand: CardBrand?): String {
 }
 
 internal fun mapPaymentMethodType(type: PaymentMethod.Type?): String {
+  Log.d("+++++****////----FLUTTER_DEBUG", "777");
   return when (type) {
     PaymentMethod.Type.AfterpayClearpay -> "AfterpayClearpay"
     PaymentMethod.Type.Alipay -> "Alipay"
@@ -135,7 +141,7 @@ internal fun mapToPaymentMethodType(type: String?): PaymentMethod.Type? {
 internal fun mapFromBillingDetails(billingDatails: PaymentMethod.BillingDetails?): WritableMap {
   val details: WritableMap = WritableNativeMap()
   val address: WritableMap = WritableNativeMap()
-
+Log.d("+++++****////----FLUTTER_DEBUG", "888");
   address.putString("country", billingDatails?.address?.country)
   address.putString("city", billingDatails?.address?.city)
   address.putString("line1", billingDatails?.address?.line1)
@@ -202,7 +208,7 @@ internal fun mapFromBankAccount(bankAccount: BankAccount?): WritableMap? {
 
 internal fun mapFromCard(card: Card?): WritableMap? {
   val cardMap: WritableMap = WritableNativeMap()
-
+  Log.d("+++++****////----FLUTTER_DEBUG", "999");
   if (card == null) {
     return null
   }
@@ -256,6 +262,7 @@ internal fun mapFromToken(token: Token): WritableMap {
 }
 
 internal fun mapFromPaymentMethod(paymentMethod: PaymentMethod): WritableMap {
+  Log.d("+++++****////----FLUTTER_DEBUG", "aaa");
   val pm: WritableMap = WritableNativeMap()
   val card: WritableMap = WritableNativeMap()
   val sepaDebit: WritableMap = WritableNativeMap()
@@ -391,10 +398,12 @@ internal fun mapFromSetupIntentLastErrorType(errorType: SetupIntent.Error.Type?)
 }
 
 fun getValOr(map: ReadableMap, key: String, default: String? = ""): String? {
+  Log.d("+++++****////----FLUTTER_DEBUG", "bbb");
   return if (map.hasKey(key)) map.getString(key) else default
 }
 
 internal fun mapToAddress(addressMap: ReadableMap?, cardAddress: Address?): Address? {
+  Log.d("+++++****////----FLUTTER_DEBUG", "ccc");
   if (addressMap == null) {
     return null
   }
@@ -419,7 +428,7 @@ internal fun mapToAddress(addressMap: ReadableMap?, cardAddress: Address?): Addr
 }
 
 internal fun mapToBillingDetails(billingDetails: ReadableMap?, cardAddress: Address?): PaymentMethod.BillingDetails? {
-  print("000000000000000000000");
+  Log.d("+++++****////----FLUTTER_DEBUG", "dddddddddddddddddddddddddddddddddd");
   if (billingDetails == null) {
     return null
   }
@@ -446,8 +455,8 @@ internal fun mapToBillingDetails(billingDetails: ReadableMap?, cardAddress: Addr
         address.setCountry(it)
       }
     }
-    print("11111111111111111111111111111111111111");
-    print(getValOr(billingDetails, "addressLine1"));
+    Log.d("+++++****////----FLUTTER_DEBUG", "11111111111111111111111111111111111111");
+    Log.d("+++++****////----FLUTTER_DEBUG", getValOr(billingDetails, "addressLine1"));
   return PaymentMethod.BillingDetails.Builder()
     .setAddress(address.build())
     .setName(getValOr(billingDetails, "name"))
